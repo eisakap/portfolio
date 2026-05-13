@@ -35,7 +35,7 @@ const PROJECTS = [
       "Mobility device for the visually impaired made with C++ and TensorFlow Lite Micro.",
     tags: ["ESP-32", "C++", "TensorFlow", "Python"],
     repo: "https://github.com/eisakap/SafeStride",
-    image: "/safestride.png",
+    image: "/esp32.jpg",
   },
   {
     title: "8 bit CPU",
@@ -171,7 +171,7 @@ export function Projects() {
             Featured projects
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-[#6b6560]">
-            passion projects and academic work.
+            passion projects, products i'm trying to bring to life, and academic work.
           </p>
         </div>
 

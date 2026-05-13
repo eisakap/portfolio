@@ -25,10 +25,10 @@ const CATEGORIES = [
       iconClass: "text-sky-700",
     },
     items: [
-      "React",
-      "Next.js",
-      "React Native",
       "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "React",
       "JavaScript",
       "Angular",
     ],
@@ -98,8 +98,6 @@ const CATEGORIES = [
       "TensorFlow Lite",
       "OpenAI APIs",
       "RAG Pipelines",
-      "Machine Learning",
-      "Data Processing",
     ],
   },
   {
@@ -123,6 +121,8 @@ const CATEGORIES = [
       "AWS",
       "ModelSim",
       "Quartus II",
+      "Jira",
+      ".NET",
     ],
   },
 ] as const;
@@ -177,7 +177,7 @@ export function TechStack() {
             </span>
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-[#6b6560]">
-            Languages, frameworks, and tools I've worked with.
+            languages, frameworks, and tools I've worked with.
           </p>
         </div>
 

@@ -48,7 +48,7 @@ export function Contact() {
                 Contact me
               </p>
               <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight text-[#141414] sm:text-5xl">
-                if something caught your eye, i'd love to know about it
+                if something caught your eye, i'd love to hear about it
               </h2>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-[#6b6560]">
                 
