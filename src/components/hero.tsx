@@ -254,26 +254,14 @@ export function Hero() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.65),transparent_55%)]" />
             <Image
               src="/placeholder-headshot.svg"
-              alt="Portrait placeholder — replace with your headshot"
+              alt=""
               fill
               className="object-cover mix-blend-multiply opacity-90"
               sizes="(max-width: 1024px) 100vw, 400px"
               priority
               unoptimized
             />
-            <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/50 bg-white/35 p-4 text-sm text-[#141414]/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-md">
-              <p className="font-[family-name:var(--font-display)] text-base font-semibold text-[#141414]">
-                Eisa Kapadia
-              </p>
-              <p className="mt-1 text-xs leading-relaxed text-[#6b6560]">
-                {" "}
-                <span className="font-mono text-[10px]"></span>
-              </p>
-            </div>
           </div>
-          <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.28em] text-[#141414]/35">
-            
-          </p>
         </motion.div>
       </div>
 
