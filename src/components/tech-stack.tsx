@@ -13,47 +13,136 @@ import { cn } from "@/lib/utils";
 const CATEGORIES = [
   {
     name: "Frontend",
-    blurb: "Placeholder — interfaces, motion, and design systems.",
+    blurb:
+      "Building responsive interfaces, real-time experiences, and mobile-first applications.",
     icon: Layers,
-    items: ["React", "Next.js", "Tailwind", "Motion"],
+    accent: {
+      glow: "from-sky-400/25 via-indigo-400/12 to-transparent",
+      border: "border-sky-500/15",
+      borderHover: "hover:border-sky-500/30",
+      pill: "border-sky-500/20 bg-sky-500/[0.08] text-sky-950/80",
+      iconWrap: "border-sky-400/25 bg-gradient-to-br from-sky-100/90 to-indigo-100/60",
+      iconClass: "text-sky-700",
+    },
+    items: [
+      "React",
+      "Next.js",
+      "React Native",
+      "TypeScript",
+      "JavaScript",
+      "Angular",
+    ],
   },
   {
     name: "Backend",
-    blurb: "Placeholder — APIs, data modeling, and reliability.",
+    blurb:
+      "Designing APIs, scalable services, databases, and real-time systems.",
     icon: Server,
-    items: ["Node", "Postgres", "REST", "Edge"],
+    accent: {
+      glow: "from-emerald-400/22 via-teal-400/12 to-transparent",
+      border: "border-emerald-500/14",
+      borderHover: "hover:border-emerald-500/28",
+      pill: "border-emerald-500/18 bg-emerald-500/[0.07] text-emerald-950/80",
+      iconWrap:
+        "border-emerald-400/25 bg-gradient-to-br from-emerald-100/90 to-teal-100/55",
+      iconClass: "text-emerald-700",
+    },
+    items: [
+      "Node.js",
+      "FastAPI",
+      "PostgreSQL",
+      "Socket.IO",
+      "REST APIs",
+      "Spring Boot",
+    ],
   },
   {
     name: "Hardware",
-    blurb: "Placeholder — boards, sensors, and embedded workflows.",
+    blurb:
+      "Embedded systems, FPGA workflows, sensors, and low-level programming.",
     icon: Cpu,
-    items: ["C/C++", "RTOS", "PCB", "Instrumentation"],
+    accent: {
+      glow: "from-amber-400/28 via-orange-400/14 to-transparent",
+      border: "border-amber-500/16",
+      borderHover: "hover:border-amber-500/32",
+      pill: "border-amber-600/20 bg-amber-500/[0.09] text-amber-950/85",
+      iconWrap:
+        "border-amber-400/30 bg-gradient-to-br from-amber-100/95 to-orange-100/50",
+      iconClass: "text-amber-800",
+    },
+    items: [
+      "C/C++",
+      "ESP32",
+      "ESP32-CAM",
+      "VHDL",
+      "SystemVerilog",
+      "Assembly",
+    ],
   },
   {
     name: "AI / ML",
-    blurb: "Placeholder — training, evaluation, and product integration.",
+    blurb:
+      "Applied machine learning, edge inference, and intelligent system integration.",
     icon: Sparkles,
-    items: ["PyTorch", "NumPy", "Pipelines", "Evals"],
+    accent: {
+      glow: "from-violet-400/26 via-fuchsia-400/14 to-transparent",
+      border: "border-violet-500/15",
+      borderHover: "hover:border-violet-500/30",
+      pill: "border-violet-500/20 bg-violet-500/[0.08] text-violet-950/82",
+      iconWrap:
+        "border-violet-400/28 bg-gradient-to-br from-violet-100/90 to-fuchsia-100/55",
+      iconClass: "text-violet-700",
+    },
+    items: [
+      "Python",
+      "TensorFlow Lite",
+      "OpenAI APIs",
+      "RAG Pipelines",
+      "Machine Learning",
+      "Data Processing",
+    ],
   },
   {
     name: "Dev Tools",
-    blurb: "Placeholder — the small things that compound.",
+    blurb:
+      "Tooling, deployment pipelines, simulation environments, and workflow optimization.",
     icon: Terminal,
-    items: ["Git", "Docker", "CI", "Observability"],
+    accent: {
+      glow: "from-slate-400/18 via-blue-400/12 to-transparent",
+      border: "border-blue-500/12",
+      borderHover: "hover:border-blue-500/26",
+      pill: "border-blue-500/16 bg-blue-500/[0.06] text-slate-900/78",
+      iconWrap:
+        "border-blue-400/22 bg-gradient-to-br from-slate-100/95 to-blue-100/60",
+      iconClass: "text-blue-800",
+    },
+    items: [
+      "Git",
+      "Docker",
+      "Jenkins",
+      "AWS",
+      "ModelSim",
+      "Quartus II",
+    ],
   },
 ] as const;
 
 function FloatingIcon({
   Icon,
   delay,
+  accent,
 }: {
   Icon: (typeof CATEGORIES)[number]["icon"];
   delay: number;
+  accent: (typeof CATEGORIES)[number]["accent"];
 }) {
   const reduce = useReducedMotion();
   return (
     <motion.div
-      className="flex size-14 items-center justify-center rounded-2xl border border-[#141414]/10 bg-white/45 shadow-[0_16px_50px_-40px_rgba(20,20,20,0.55)] backdrop-blur-md"
+      className={cn(
+        "flex size-14 items-center justify-center rounded-2xl border shadow-[0_16px_50px_-40px_rgba(20,20,20,0.45)] backdrop-blur-md",
+        accent.iconWrap,
+      )}
       animate={
         reduce
           ? undefined
@@ -66,7 +155,7 @@ function FloatingIcon({
         delay,
       }}
     >
-      <Icon className="size-6 text-[#141414]/70" aria-hidden />
+      <Icon className={cn("size-6", accent.iconClass)} aria-hidden />
     </motion.div>
   );
 }
@@ -80,14 +169,15 @@ export function TechStack() {
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-[#141414]/40">
-            Capabilities
+            Tech Stack
           </p>
-          <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight text-[#141414] sm:text-5xl">
-            Tools & territories
+          <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight sm:text-5xl">
+            <span className="bg-gradient-to-r from-[#141414] via-indigo-800 to-violet-800 bg-clip-text text-transparent">
+              Tools & territories
+            </span>
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-[#6b6560]">
-            Placeholder taxonomy — adjust categories to match how you actually
-            work. Icons float; cards stay calm.
+            Languages, frameworks, and tools I've worked with.
           </p>
         </div>
 
@@ -98,11 +188,21 @@ export function TechStack() {
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 360, damping: 28 }}
                 className={cn(
-                  "relative h-full overflow-hidden rounded-3xl border border-[#141414]/10 bg-white/40 p-6 shadow-[0_22px_70px_-48px_rgba(20,20,20,0.55)] backdrop-blur-md transition-shadow duration-500",
-                  "hover:border-[#141414]/16 hover:shadow-[0_32px_90px_-52px_rgba(20,20,20,0.6)]",
+                  "group relative h-full overflow-hidden rounded-3xl border bg-white/45 p-6 shadow-[0_22px_70px_-48px_rgba(20,20,20,0.5)] backdrop-blur-md transition-shadow duration-500",
+                  cat.accent.border,
+                  cat.accent.borderHover,
+                  "hover:shadow-[0_32px_90px_-52px_rgba(20,20,20,0.55)]",
                 )}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div
+                  className={cn(
+                    "pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-gradient-to-br opacity-70 blur-3xl transition-opacity duration-500 group-hover:opacity-100",
+                    cat.accent.glow,
+                  )}
+                  aria-hidden
+                />
+                <div className="pointer-events-none absolute inset-px rounded-[1.4rem] bg-gradient-to-b from-white/50 to-transparent opacity-60" aria-hidden />
+                <div className="relative flex items-start justify-between gap-4">
                   <div>
                     <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-[#141414]">
                       {cat.name}
@@ -111,12 +211,17 @@ export function TechStack() {
                       {cat.blurb}
                     </p>
                   </div>
-                  <FloatingIcon Icon={cat.icon} delay={i * 0.35} />
+                  <FloatingIcon Icon={cat.icon} delay={i * 0.35} accent={cat.accent} />
                 </div>
-                <ul className="mt-6 flex flex-wrap gap-2">
+                <ul className="relative mt-6 flex flex-wrap gap-2.5">
                   {cat.items.map((item) => (
                     <li key={item}>
-                      <span className="inline-flex rounded-full border border-[#141414]/10 bg-[#141414]/[0.035] px-3 py-1 text-xs font-medium text-[#141414]/70">
+                      <span
+                        className={cn(
+                          "inline-flex rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-300 group-hover:border-opacity-80",
+                          cat.accent.pill,
+                        )}
+                      >
                         {item}
                       </span>
                     </li>

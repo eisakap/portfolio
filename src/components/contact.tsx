@@ -10,32 +10,26 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   {
     label: "GitHub",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/eisakap",
     icon: Github,
     external: true,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
+    href: "https://linkedin.com/in/eisa-kapadia/",
     icon: Linkedin,
     external: true,
   },
   {
     label: "Email",
-    href: "mailto:you@example.com",
+    href: "mailto:ekapadia@torontomu.ca",
     icon: Mail,
     external: true,
   },
   {
     label: "Resume",
-    href: "https://example.com/your-resume.pdf",
+    href: "/Eisa_Kapadia.pdf",
     icon: FileText,
-    external: true,
-  },
-  {
-    label: "Twitter / X",
-    href: "https://twitter.com/yourusername",
-    icon: ArrowUpRight,
     external: true,
   },
 ] as const;
@@ -50,16 +44,14 @@ export function Contact() {
         <div className="rounded-[2rem] border border-[#141414]/10 bg-white/35 p-10 shadow-[0_30px_120px_-70px_rgba(20,20,20,0.65)] backdrop-blur-xl sm:p-14 lg:p-16">
           <Stagger className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <StaggerItem className="lg:col-span-6">
-              <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-[#141414]/40">
-                Contact
+              <p className="font-mono text-[16px] uppercase tracking-[0.35em] text-[#141414]/40">
+                Contact me
               </p>
               <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight text-[#141414] sm:text-5xl">
-                Let&apos;s build something quiet and excellent.
+                if something caught your eye, i'd love to know about it
               </h2>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-[#6b6560]">
-                Placeholder invitation — one paragraph about the collaborations
-                you want, how to reach you, and what a great first message
-                includes.
+                
               </p>
             </StaggerItem>
 
@@ -103,7 +95,7 @@ export function Contact() {
                 ))}
               </ul>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.28em] text-[#141414]/35">
-                Replace hrefs · add real resume file in /public
+                
               </p>
             </StaggerItem>
           </Stagger>

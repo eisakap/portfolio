@@ -1,9 +1,8 @@
 "use client";
 
-import { About } from "@/components/about";
 import { AmbientBackground } from "@/components/ambient-background";
 import { Contact } from "@/components/contact";
-import { Experience } from "@/components/experience";
+// import { Experience } from "@/components/experience";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
@@ -19,10 +18,9 @@ export function PortfolioShell() {
         <Navbar />
         <main id="main-content" className="flex-1">
           <Hero />
-          <About />
           <Projects />
           <TechStack />
-          <Experience />
+          {/* <Experience /> — Path section; uncomment when ready */}
           <Contact />
         </main>
         <Footer />

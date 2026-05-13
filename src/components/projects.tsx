@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,40 +14,36 @@ import { cn } from "@/lib/utils";
 
 const PROJECTS = [
   {
-    title: "Project One — Placeholder",
+    title: "Studdle",
     description:
-      "A cinematic case study placeholder. Describe the problem, your constraints, and the outcome in two sentences.",
-    tags: ["Next.js", "TypeScript", "Motion", "Design"],
-    href: "#",
-    repo: "https://github.com/yourusername",
-    image: "/placeholder-project.svg",
+      "Studdle is a smart desk companion that helps you stay focused, build better habits, and stay on track with your goals.",
+    tags: ["C++", "JavaScript", "SQL", "React Native"],
+    repo: "https://github.com/eisakap",
+    image: "/studdle_project_art.png",
   },
   {
-    title: "Project Two — Placeholder",
+    title: "ModuLib - Bookstore Management System",
     description:
-      "Another flagship build — hardware, ML, or full-stack. Keep the tone editorial and confident.",
-    tags: ["Python", "CUDA", "Systems", "Research"],
-    href: "#",
-    repo: "https://github.com/yourusername",
-    image: "/placeholder-project.svg",
+      "Bookstore management system made with Java and SQL.",
+    tags: ["Java", "SQL", "UX Design", "JavaFX"],
+    repo: "https://github.com/eisakap",
+    image: "/modulib.png",
   },
   {
-    title: "Project Three — Placeholder",
+    title: "SafeStride",
     description:
-      "Product-minded engineering: prototypes, polish, and performance budgets that feel invisible.",
-    tags: ["React", "Node", "Postgres", "AWS"],
-    href: "#",
-    repo: "https://github.com/yourusername",
-    image: "/placeholder-project.svg",
+      "Mobility device for the visually impaired made with C++ and TensorFlow Lite Micro.",
+    tags: ["ESP-32", "C++", "TensorFlow", "Python"],
+    repo: "https://github.com/eisakap/SafeStride",
+    image: "/safestride.png",
   },
   {
-    title: "Project Four — Placeholder",
+    title: "8 bit CPU",
     description:
-      "A tools or platform story — something you would proudly show in a design-forward portfolio.",
-    tags: ["Rust", "CLI", "DX", "Open Source"],
-    href: "#",
-    repo: "https://github.com/yourusername",
-    image: "/placeholder-project.svg",
+      "8-bit CPU with a modular ALU and memory system, coded with VHDL and tested on a Cyclone II FPGA board.",
+    tags: ["VHDL", "Quartus II", "ModelSim", "FPGA"],
+    repo: "https://github.com/eisakap/vhdl-cpu",
+    image: "/vhdl-cpi.png",
   },
 ] as const;
 
@@ -144,13 +140,6 @@ function ProjectCard({
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
-                href={project.href}
-                className="inline-flex h-11 items-center gap-2 rounded-full bg-[#141414] px-6 text-sm font-medium tracking-tight text-[#f7f5f2] shadow-sm transition hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
-              >
-                View Project
-                <ArrowUpRight className="size-4" aria-hidden />
-              </Link>
-              <Link
                 href={project.repo}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -171,7 +160,7 @@ export function Projects() {
   return (
     <AnimatedSection
       id="projects"
-      className="scroll-mt-28 px-5 py-24 sm:px-8 sm:py-32"
+      className="-mt-8 scroll-mt-28 px-5 pb-24 pt-6 sm:-mt-10 sm:px-8 sm:pb-32 sm:pt-8"
     >
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
@@ -182,8 +171,7 @@ export function Projects() {
             Featured projects
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-[#6b6560]">
-            Placeholder copy — this section is intentionally large. Swap
-            imagery, titles, and links when your case studies are ready.
+            passion projects and academic work.
           </p>
         </div>
 

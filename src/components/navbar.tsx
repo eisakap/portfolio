@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 
 const NAV_IDS = [
   { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
   { id: "projects", label: "Work" },
   { id: "stack", label: "Stack" },
-  { id: "experience", label: "Path" },
+  // Path / experience timeline — re-enable when needed
+  // { id: "experience", label: "Path" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -33,7 +33,7 @@ export function Navbar() {
           className="group relative font-[family-name:var(--font-display)] text-lg font-semibold tracking-tight text-[#141414] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]/80"
           aria-label="Back to top"
         >
-          <span className="relative z-10">Portfolio</span>
+          <span className="relative z-10">Eisa Kapadia</span>
           <span
             className="absolute -inset-x-2 -inset-y-1 -z-0 rounded-full bg-[#141414]/0 transition-colors group-hover:bg-[#141414]/5"
             aria-hidden
@@ -69,13 +69,17 @@ export function Navbar() {
           })}
         </nav>
 
-        <button
-          type="button"
-          onClick={() => scrollToSection("contact")}
-          className="rounded-full border border-[#141414]/12 bg-[#141414] px-4 py-2 text-xs font-medium tracking-tight text-[#f7f5f2] shadow-sm transition hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("contact");
+            window.history.replaceState(null, "", "#contact");
+          }}
+          className="inline-flex shrink-0 items-center justify-center rounded-full border border-[#141414]/12 bg-[#141414] px-4 py-2 text-xs font-medium tracking-tight text-[#f7f5f2] shadow-sm transition hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
         >
           Let&apos;s talk
-        </button>
+        </a>
       </div>
     </header>
   );
