@@ -173,7 +173,7 @@ export function TechStack() {
           </p>
           <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight sm:text-5xl">
             <span className="bg-gradient-to-r from-[#141414] via-indigo-800 to-violet-800 bg-clip-text text-transparent">
-              Tools & territories
+              Tech Stack
             </span>
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-[#6b6560]">

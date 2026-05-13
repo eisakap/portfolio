@@ -15,9 +15,9 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio — Creative Engineer",
+  title: "Eisa Kapadia",
   description:
-    "A minimal, typography-forward portfolio. Placeholder metadata — update with your story.",
+    "Computer Engineering student building full-stack software, embedded systems, and AI-powered products.",
 };
 
 export default function RootLayout({
