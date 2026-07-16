@@ -2,8 +2,18 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import dynamic from "next/dynamic";
 
 import { scrollToSection } from "@/lib/smooth-scroll";
+
+// playhtml touches `document` at import time, so load browser-only.
+const PlayhtmlCursorCount = dynamic(
+  () =>
+    import("@/components/playhtml-cursor-count").then(
+      (m) => m.PlayhtmlCursorCount,
+    ),
+  { ssr: false, loading: () => <span className="h-4" /> },
+);
 
 const SCROLL_TEXT =
   " · ";
@@ -22,6 +32,9 @@ export function Footer() {
             </span>
             <span className="mt-2 block">
               © {new Date().getFullYear()} Eisa Kapadia
+            </span>
+            <span className="mt-3 block">
+              <PlayhtmlCursorCount />
             </span>
           </p>
           <button

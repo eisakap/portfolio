@@ -1,12 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Sparkles } from "lucide-react";
-import Image from "next/image";
+import { ArrowUpRight, Github, Linkedin } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import { Marquee } from "@/components/marquee";
 import { MagneticButton } from "@/components/magnetic-button";
+
+// playhtml touches `document` at import time, so load the lamp browser-only to
+// avoid the "document is not defined" crash during server-side rendering.
+const PlayhtmlLamp = dynamic(
+  () => import("@/components/playhtml-lamp").then((m) => m.PlayhtmlLamp),
+  { ssr: false },
+);
 import { scrollToSection } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
@@ -22,28 +28,6 @@ const SOCIAL_LINKS = [
     icon: Linkedin,
   },
 ] as const;
-
-const MARQUEE_ITEMS = [
-  "C/C++",
-  "Java",
-  "Python",
-  "TypeScript",
-  "PostgreSQL",
-  "VHDL",
-  "Matlab",
-  "System Verilog",
-  "Assembly",
-  "Javascript",
-  "TypeScript",
-  "C#",
-  "Springboot",
-  "FastAPI",
-  "Next.js",
-  "Node.js",
-  "Socket.io",
-  "React JS",
-  "Angular",
-];
 
 function FloatingOrbs() {
   const reduce = useReducedMotion();
@@ -215,25 +199,8 @@ export function Hero() {
                     }}
                   />
                 )}
-                <span className="relative z-[1] flex items-center gap-2">
+                <span className="relative z-[1] flex items-center">
                   Contact Me
-                  <motion.span
-                    animate={
-                      reduce
-                        ? undefined
-                        : { rotate: [0, 12, -8, 0], scale: [1, 1.12, 1] }
-                    }
-                    transition={{
-                      duration: 2.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <Sparkles
-                      className="size-4 text-amber-100 drop-shadow-sm"
-                      aria-hidden
-                    />
-                  </motion.span>
                 </span>
               </MagneticButton>
             </span>
@@ -241,7 +208,7 @@ export function Hero() {
         </div>
 
         <motion.div
-          className="relative w-full max-w-md shrink-0 lg:max-w-sm"
+          className="relative flex w-full max-w-md shrink-0 justify-center lg:max-w-sm"
           initial={reduce ? false : { opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
@@ -250,18 +217,12 @@ export function Hero() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-[#141414]/10 bg-gradient-to-br from-[#ebe6df] via-[#f3efe8] to-[#dfd8cf] shadow-[0_24px_80px_-40px_rgba(20,20,20,0.35)]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.65),transparent_55%)]" />
-            <Image
-              src="/placeholder-headshot.svg"
-              alt=""
-              fill
-              className="object-cover mix-blend-multiply opacity-90"
-              sizes="(max-width: 1024px) 100vw, 400px"
-              priority
-              unoptimized
-            />
-          </div>
+          {/* playhtml shared lamp — click to turn the light on/off, synced across visitors */}
+          <PlayhtmlLamp
+            cordClassName="h-24 w-px sm:h-32"
+            imgClassName="h-64 w-auto sm:h-80 lg:h-[26rem]"
+            glowClassName="top-24 size-72 sm:top-32 sm:size-80 lg:size-96"
+          />
         </motion.div>
       </div>
 
@@ -288,10 +249,6 @@ export function Hero() {
           </Link>
         ))}
       </motion.div>
-
-      <div className="mx-auto mt-6 max-w-6xl border-t border-[#141414]/10 sm:mt-5">
-        <Marquee items={MARQUEE_ITEMS} speed={25} />
-      </div>
     </section>
   );
 }

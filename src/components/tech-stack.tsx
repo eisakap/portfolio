@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Cpu, Layers, Server, Sparkles, Terminal } from "lucide-react";
+import dynamic from "next/dynamic";
 
 import {
   AnimatedSection,
@@ -9,6 +10,14 @@ import {
   StaggerItem,
 } from "@/components/animated-section";
 import { cn } from "@/lib/utils";
+
+// playhtml touches `document` at import time, so load the spinnable icon
+// browser-only. A same-size placeholder reserves its space until it loads.
+const PlayhtmlSpinIcon = dynamic(
+  () =>
+    import("@/components/playhtml-spin-icon").then((m) => m.PlayhtmlSpinIcon),
+  { ssr: false, loading: () => <div className="size-14 shrink-0" /> },
+);
 
 const CATEGORIES = [
   {
@@ -127,37 +136,8 @@ const CATEGORIES = [
   },
 ] as const;
 
-function FloatingIcon({
-  Icon,
-  delay,
-  accent,
-}: {
-  Icon: (typeof CATEGORIES)[number]["icon"];
-  delay: number;
-  accent: (typeof CATEGORIES)[number]["accent"];
-}) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      className={cn(
-        "flex size-14 items-center justify-center rounded-2xl border shadow-[0_16px_50px_-40px_rgba(20,20,20,0.45)] backdrop-blur-md",
-        accent.iconWrap,
-      )}
-      animate={
-        reduce
-          ? undefined
-          : { y: [0, -10, 0], rotate: [-1.5, 1.5, -1.5] }
-      }
-      transition={{
-        duration: 6 + delay,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
-      }}
-    >
-      <Icon className={cn("size-6", accent.iconClass)} aria-hidden />
-    </motion.div>
-  );
+function slugify(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 export function TechStack() {
@@ -182,7 +162,7 @@ export function TechStack() {
         </div>
 
         <Stagger className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {CATEGORIES.map((cat, i) => (
+          {CATEGORIES.map((cat) => (
             <StaggerItem key={cat.name}>
               <motion.div
                 whileHover={{ y: -4 }}
@@ -211,7 +191,12 @@ export function TechStack() {
                       {cat.blurb}
                     </p>
                   </div>
-                  <FloatingIcon Icon={cat.icon} delay={i * 0.35} accent={cat.accent} />
+                  <PlayhtmlSpinIcon
+                    id={`spin-${slugify(cat.name)}`}
+                    Icon={cat.icon}
+                    wrapClassName={cat.accent.iconWrap}
+                    iconClassName={cat.accent.iconClass}
+                  />
                 </div>
                 <ul className="relative mt-6 flex flex-wrap gap-2.5">
                   {cat.items.map((item) => (

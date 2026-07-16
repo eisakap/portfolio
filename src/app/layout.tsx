@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
+import { PlayhtmlProvider } from "@/components/play-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,7 +37,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
-        {children}
+        <PlayhtmlProvider>{children}</PlayhtmlProvider>
         <Analytics />
       </body>
     </html>

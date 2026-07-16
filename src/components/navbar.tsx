@@ -1,11 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { useActiveSection } from "@/hooks/use-active-section";
 import { scrollToSection } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
+
+// playhtml touches `document` at import time, so load browser-only.
+const PlayhtmlConfettiButton = dynamic(
+  () =>
+    import("@/components/playhtml-confetti-button").then(
+      (m) => m.PlayhtmlConfettiButton,
+    ),
+  { ssr: false, loading: () => <span className="size-9 shrink-0" /> },
+);
 
 const NAV_IDS = [
   { id: "hero", label: "Home" },
@@ -69,17 +79,20 @@ export function Navbar() {
           })}
         </nav>
 
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("contact");
-            window.history.replaceState(null, "", "#contact");
-          }}
-          className="inline-flex shrink-0 items-center justify-center rounded-full border border-[#141414]/12 bg-[#141414] px-4 py-2 text-xs font-medium tracking-tight text-[#f7f5f2] shadow-sm transition hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
-        >
-          Let&apos;s talk
-        </a>
+        <div className="flex shrink-0 items-center gap-2">
+          <PlayhtmlConfettiButton />
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("contact");
+              window.history.replaceState(null, "", "#contact");
+            }}
+            className="inline-flex shrink-0 items-center justify-center rounded-full border border-[#141414]/12 bg-[#141414] px-4 py-2 text-xs font-medium tracking-tight text-[#f7f5f2] shadow-sm transition hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
+          >
+            Let&apos;s talk
+          </a>
+        </div>
       </div>
     </header>
   );
