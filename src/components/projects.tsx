@@ -33,7 +33,7 @@ const PROJECTS: readonly Project[] = [
   {
     title: "Loopr",
     description: "Loopr is a local Windows 11 desktop application for publishing live camera video, immutable freeze frames, recorded loops, imported media, still images, and privacy cards through a stable virtual camera.",
-    tags: ["beta"],
+    tags: ["Electron", "React", "Vite", "C++"],
     download: { label: "Download Loopr here!", href: "/loopr" },
   },
   {
