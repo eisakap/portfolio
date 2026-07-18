@@ -45,7 +45,7 @@ const CORAL = "from-[#ff8163] to-[#ed3a29]";
 const LooprDownloadButton = dynamic(
   () =>
     import("@/components/playhtml-download-counter").then(
-      (m) => m.LooprDownloadButton,
+      (m) => m.LooprDownload,
     ),
   {
     ssr: false,
