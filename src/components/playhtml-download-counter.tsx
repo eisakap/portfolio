@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { withSharedState } from "@playhtml/react";
 import { Download, Info, ShieldAlert, X } from "lucide-react";
 
@@ -37,8 +38,15 @@ const CountButton = withSharedState(
   },
   ({ data, setData }, { onDownload }: { onDownload: () => void }) => {
     const count = data?.count ?? SEED;
+    // The count text lives in a slot at the bottom of the page; render it there
+    // via a portal so it still reads this same shared playhtml state.
+    const [slot, setSlot] = useState<HTMLElement | null>(null);
+    useEffect(() => {
+      setSlot(document.getElementById("loopr-count-slot"));
+    }, []);
+
     return (
-      <div className="flex flex-col items-center gap-3">
+      <div className="inline-flex">
         <button
           type="button"
           onClick={() => {
@@ -53,12 +61,16 @@ const CountButton = withSharedState(
           />
           Download for Windows
         </button>
-        <p className="text-sm text-[#141414]/50">
-          <span className="font-semibold text-[#ed3a29]">
-            {count.toLocaleString()}
-          </span>{" "}
-          {count === 1 ? "download" : "downloads"} and counting
-        </p>
+        {slot &&
+          createPortal(
+            <span className="inline-flex items-center gap-1.5 text-sm text-[#141414]/55">
+              <span className="font-semibold text-[#ed3a29]">
+                {count.toLocaleString()}
+              </span>{" "}
+              {count === 1 ? "download" : "downloads"} and counting
+            </span>,
+            slot,
+          )}
       </div>
     );
   },

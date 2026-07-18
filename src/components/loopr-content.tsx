@@ -50,19 +50,16 @@ const LooprDownloadButton = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex flex-col items-center gap-3">
-        <a
-          href={DOWNLOAD_URL}
-          className={cn(
-            "group inline-flex h-14 items-center gap-3 rounded-full bg-gradient-to-br px-8 text-base font-semibold tracking-tight text-white shadow-[0_18px_50px_-16px_rgba(237,58,41,0.6)] transition active:scale-[0.98]",
-            CORAL,
-          )}
-        >
-          <Download className="size-5" aria-hidden />
-          Download for Windows
-        </a>
-        <p className="text-sm text-[#141414]/50">downloads and counting</p>
-      </div>
+      <a
+        href={DOWNLOAD_URL}
+        className={cn(
+          "group inline-flex h-14 items-center gap-3 rounded-full bg-gradient-to-br px-8 text-base font-semibold tracking-tight text-white shadow-[0_18px_50px_-16px_rgba(237,58,41,0.6)] transition active:scale-[0.98]",
+          CORAL,
+        )}
+      >
+        <Download className="size-5" aria-hidden />
+        Download for Windows
+      </a>
     ),
   },
 );
@@ -211,6 +208,8 @@ export function LooprContent() {
 
         {/* footer */}
         <footer className="mt-24 flex flex-col items-center gap-4 border-t border-[#141414]/10 pt-10 text-center">
+          {/* live shared download counter renders here via portal */}
+          <div id="loopr-count-slot" className="min-h-5" />
           <a
             href={RELEASES_URL}
             target="_blank"
