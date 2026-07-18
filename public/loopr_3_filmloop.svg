@@ -1,0 +1,27 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="strip3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF6F61"/>
+      <stop offset="1" stop-color="#F4511E"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#FFF1E6"/>
+  <!-- infinity-shaped filmstrip -->
+  <g transform="translate(256,256)" fill="none">
+    <path d="M -150 0
+             C -150 -66 -84 -66 -30 -18
+             C 24 30 84 66 138 66
+             C 190 66 190 -66 138 -66
+             C 84 -66 24 -30 -30 18
+             C -84 66 -150 66 -150 0 Z"
+          stroke="url(#strip3)" stroke-width="52" stroke-linejoin="round"/>
+    <!-- sprocket holes -->
+    <path d="M -150 0
+             C -150 -66 -84 -66 -30 -18
+             C 24 30 84 66 138 66
+             C 190 66 190 -66 138 -66
+             C 84 -66 24 -30 -30 18
+             C -84 66 -150 66 -150 0 Z"
+          stroke="#FFF1E6" stroke-width="10" stroke-dasharray="4 26" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Github } from "lucide-react";
+import { Download, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +12,16 @@ import {
 } from "@/components/animated-section";
 import { cn } from "@/lib/utils";
 
-const PROJECTS = [
+type Project = {
+  title: string;
+  description: string;
+  tags: readonly string[];
+  image?: string;
+  repo?: string;
+  download?: { label: string; href: string };
+};
+
+const PROJECTS: readonly Project[] = [
   {
     title: "Studdle",
     description:
@@ -22,12 +31,10 @@ const PROJECTS = [
     image: "/studdle_project_art.png",
   },
   {
-    title: "ModuLib - Bookstore Management System",
-    description:
-      "Bookstore management system made with Java and SQL.",
-    tags: ["Java", "SQL", "UX Design", "JavaFX"],
-    repo: "https://github.com/eisakap",
-    image: "/modulib.png",
+    title: "Loopr",
+    description: "Loopr is a local Windows 11 desktop application for publishing live camera video, immutable freeze frames, recorded loops, imported media, still images, and privacy cards through a stable virtual camera.",
+    tags: ["beta"],
+    download: { label: "Download Loopr here!", href: "/loopr" },
   },
   {
     title: "SafeStride",
@@ -45,14 +52,14 @@ const PROJECTS = [
     repo: "https://github.com/eisakap/vhdl-cpu",
     image: "/vhdl-cpi.png",
   },
-] as const;
+];
 
 function ProjectCard({
   project,
   reverse,
   index,
 }: {
-  project: (typeof PROJECTS)[number];
+  project: Project;
   reverse: boolean;
   index: number;
 }) {
@@ -101,21 +108,29 @@ function ProjectCard({
           )}
         >
           <div className="relative aspect-[16/11] overflow-hidden lg:aspect-auto lg:min-h-[320px]">
-            <motion.div
-              className="relative h-full w-full"
-              whileHover={reduce ? undefined : { scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 220, damping: 28 }}
-            >
-              <Image
-                src={project.image}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority={index === 0}
-                unoptimized
-              />
-            </motion.div>
+            {project.image ? (
+              <motion.div
+                className="relative h-full w-full"
+                whileHover={reduce ? undefined : { scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 220, damping: 28 }}
+              >
+                <Image
+                  src={project.image}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={index === 0}
+                  unoptimized
+                />
+              </motion.div>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#ebe6df] via-[#f3efe8] to-[#dfd8cf]">
+                <span className="font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight text-[#141414]/30">
+                  {project.title}
+                </span>
+              </div>
+            )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#141414]/10 via-transparent to-transparent opacity-60 mix-blend-multiply" />
           </div>
 
@@ -139,15 +154,26 @@ function ProjectCard({
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link
-                href={project.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-[#141414]/14 bg-white/40 px-6 text-sm font-medium tracking-tight text-[#141414] backdrop-blur-md transition hover:border-[#141414]/22 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
-              >
-                <Github className="size-4" aria-hidden />
-                GitHub
-              </Link>
+              {project.repo && (
+                <Link
+                  href={project.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center gap-2 rounded-full border border-[#141414]/14 bg-white/40 px-6 text-sm font-medium tracking-tight text-[#141414] backdrop-blur-md transition hover:border-[#141414]/22 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
+                >
+                  <Github className="size-4" aria-hidden />
+                  GitHub
+                </Link>
+              )}
+              {project.download && (
+                <Link
+                  href={project.download.href}
+                  className="inline-flex h-11 items-center gap-2 rounded-full border border-[#141414]/14 bg-[#141414] px-6 text-sm font-medium tracking-tight text-[#f7f5f2] transition hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
+                >
+                  <Download className="size-4" aria-hidden />
+                  {project.download.label}
+                </Link>
+              )}
             </div>
           </div>
         </div>
