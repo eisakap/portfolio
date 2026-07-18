@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePageData } from "@playhtml/react";
+import { withSharedState } from "@playhtml/react";
 import { Download, Info, ShieldAlert, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+const SEED = 5;
 const CORAL = "from-[#ff8163] to-[#ed3a29]";
 
 const BUTTON_CLASS = cn(
@@ -23,34 +24,29 @@ function Chip({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Download button with a live shared counter (playhtml `usePageData`) and a
- * SmartScreen help modal. Clicking the button increments the shared count and
- * opens the modal; the actual .exe download happens from "Continue to download".
- * Loaded browser-only since @playhtml/react touches `document` at import time.
+ * Download button + shared counter (playhtml `withSharedState`). Clicking the
+ * button increments the count (synced + persisted across visitors) and opens
+ * the SmartScreen help modal via the `onClick` callback. Seeded at SEED via a
+ * versioned id so the starting value takes on a fresh store.
  */
-export function LooprDownload({ href }: { href: string }) {
-  const [count, setCount] = usePageData<number>("loopr-download-count", 0);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    // prevent background scroll while modal is open
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  return (
-    <>
+const CountButton = withSharedState(
+  {
+    defaultData: { count: SEED },
+    id: "loopr-downloads-v2",
+    loading: { behavior: "none" },
+  },
+  ({ data, setData }, { onDownload }: { onDownload: () => void }) => {
+    const count = data?.count ?? SEED;
+    return (
       <div className="flex flex-col items-center gap-3">
-        <button type="button" onClick={() => { setCount(count + 1); setOpen(true); }} className={BUTTON_CLASS}>
+        <button
+          type="button"
+          onClick={() => {
+            setData({ count: count + 1 });
+            onDownload();
+          }}
+          className={BUTTON_CLASS}
+        >
           <Download
             className="size-5 transition-transform group-hover:translate-y-0.5"
             aria-hidden
@@ -64,6 +60,35 @@ export function LooprDownload({ href }: { href: string }) {
           {count === 1 ? "download" : "downloads"} and counting
         </p>
       </div>
+    );
+  },
+);
+
+/**
+ * Wraps the shared counter button with the SmartScreen help modal. The actual
+ * .exe download happens from "Continue to download". Loaded browser-only since
+ * @playhtml/react touches `document` at import time.
+ */
+export function LooprDownload({ href }: { href: string }) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  return (
+    <>
+      <CountButton onDownload={() => setOpen(true)} />
 
       {open && (
         <div
