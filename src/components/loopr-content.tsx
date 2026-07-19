@@ -98,7 +98,7 @@ export function LooprContent() {
           className="inline-flex items-center gap-2 rounded-full border border-[#141414]/12 bg-white/50 px-4 py-2 text-xs font-medium tracking-tight text-[#141414]/70 backdrop-blur-md transition hover:border-[#141414]/22 hover:bg-white/75 hover:text-[#141414] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141414]/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f2]"
         >
           <ArrowLeft className="size-3.5" aria-hidden />
-          Eisa Kapadia
+          Back
         </Link>
 
         {/* hero */}
