@@ -27,7 +27,7 @@ const PROJECTS: readonly Project[] = [
     description:
       "Studdle is a smart desk companion that helps you stay focused, build better habits, and stay on track with your goals.",
     tags: ["C++", "JavaScript", "SQL", "React Native"],
-    repo: "https://github.com/eisakap",
+    download: { label: "Join the waitlist!", href: "https://studdle.app" },
     image: "/studdle_project_art.png",
   },
   {
@@ -76,9 +76,9 @@ function ProjectCard({
           reduce
             ? undefined
             : {
-                y: -6,
-                transition: { type: "spring", stiffness: 260, damping: 26 },
-              }
+              y: -6,
+              transition: { type: "spring", stiffness: 260, damping: 26 },
+            }
         }
         onMouseMove={(e) => {
           const el = e.currentTarget;
